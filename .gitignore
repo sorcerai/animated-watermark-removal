@@ -89,3 +89,17 @@ logs/
 
 # Build artifacts
 *.json.bak
+
+# Internal dev files (not for public repo)
+ai/
+plan.md
+STANDALONE_PIPELINE_INSTRUCTIONS.md
+
+# Legacy/deprecated code
+deploy/
+docs/
+tests/
+workflows/
+setup/
+scripts/
+src/comfyui/
