@@ -48,7 +48,10 @@ class AudioPreservationPipeline:
                          capture_output=True, check=True)
         except (subprocess.CalledProcessError, FileNotFoundError):
             raise RuntimeError(
-                "ffmpeg not found. Install: winget install Gyan.FFmpeg"
+                "ffmpeg not found. Install:
+  - Linux: sudo apt install ffmpeg
+  - macOS: brew install ffmpeg
+  - Windows: winget install Gyan.FFmpeg"
             )
 
     def get_video_info(self, video_path: str) -> Dict:

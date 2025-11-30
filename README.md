@@ -19,6 +19,20 @@ Remove animated watermarks from Sora-generated videos using AI-powered detection
 - CUDA 11.8+
 - FFmpeg (for video I/O)
 
+### Install FFmpeg
+
+```bash
+# Linux (Ubuntu/Debian)
+sudo apt update && sudo apt install ffmpeg
+
+# macOS
+brew install ffmpeg
+
+# Windows
+winget install Gyan.FFmpeg
+# Or download from: https://ffmpeg.org/download.html
+```
+
 ## Installation
 
 ### 1. Clone the repository
