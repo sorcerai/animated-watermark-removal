@@ -374,11 +374,18 @@ class StandaloneWatermarkJob:
         """
         Detect watermarks and generate segmentation masks for all frames.
 
+        Includes backward propagation: copies mask to N-3 frames before first detection
+        to catch watermarks that fade in gradually.
+
         Returns statistics about detection coverage.
         """
         frame_files = sorted(frames_dir.glob("*.png"))
         frames_with_detection = 0
         total_coverage = 0.0
+
+        # Track first detection for backward propagation
+        first_detection_frame = None
+        first_detection_mask = None
 
         for i, frame_path in enumerate(frame_files):
             # Read frame
@@ -403,7 +410,13 @@ class StandaloneWatermarkJob:
                     frames_with_detection += 1
                     coverage = get_mask_coverage(mask)
                     total_coverage += coverage
-                    
+
+                    # Track first detection for backward propagation
+                    if first_detection_frame is None:
+                        first_detection_frame = i
+                        first_detection_mask = mask.copy()
+                        logger.debug(f"First watermark detection at frame {i}")
+
                     validation = validate_mask(mask, frame.shape)
                     if validation["warnings"]:
                         for w in validation["warnings"]:
@@ -430,6 +443,12 @@ class StandaloneWatermarkJob:
                     coverage = get_mask_coverage(mask)
                     total_coverage += coverage
 
+                    # Track first detection for backward propagation
+                    if first_detection_frame is None:
+                        first_detection_frame = i
+                        first_detection_mask = mask.copy()
+                        logger.debug(f"First watermark detection at frame {i}")
+
                     # Validate mask
                     validation = validate_mask(mask, frame.shape)
                     if validation["warnings"]:
@@ -449,6 +468,21 @@ class StandaloneWatermarkJob:
 
         # Reset segmenter state
         self.segmenter.reset()
+
+        # Backward propagation: copy first detection mask to N-3 preceding frames
+        # This catches watermarks that fade in gradually
+        backward_frames = 3
+        if first_detection_frame is not None and first_detection_frame > 0:
+            start_frame = max(0, first_detection_frame - backward_frames)
+            logger.info(
+                f"Backward propagation: copying mask from frame {first_detection_frame} "
+                f"to frames {start_frame}-{first_detection_frame - 1}"
+            )
+            for j in range(start_frame, first_detection_frame):
+                frame_name = frame_files[j].name
+                save_mask(first_detection_mask, masks_dir / frame_name)
+                frames_with_detection += 1
+                total_coverage += get_mask_coverage(first_detection_mask)
 
         avg_coverage = (total_coverage / frames_with_detection) if frames_with_detection > 0 else 0.0
 
