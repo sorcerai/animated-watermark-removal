@@ -38,8 +38,8 @@ winget install Gyan.FFmpeg
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/sora-watermark-remover.git
-cd sora-watermark-remover
+git clone https://github.com/yourusername/animated-watermark-removal.git
+cd animated-watermark-removal
 ```
 
 ### 2. Create virtual environment
@@ -161,7 +161,7 @@ Output Video (watermark removed)
 ## Project Structure
 
 ```
-sora-watermark-remover/
+animated-watermark-removal/
 ├── remove_text.py          # CLI entry point
 ├── src/
 │   ├── core/
