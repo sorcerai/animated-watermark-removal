@@ -1,4 +1,4 @@
-"""Core modules for Sora watermark remover."""
+"""Core modules for Animated watermark remover."""
 
 from .audio_preservation import AudioPreservationPipeline
 from .yolo_detector import YOLOWorldDetector

@@ -1,4 +1,4 @@
-"""Command-line interface for the Sora watermark removal pipeline."""
+"""Command-line interface for the animated watermark removal pipeline."""
 
 from __future__ import annotations
 
@@ -26,7 +26,7 @@ def _parse_point(value: Optional[str]) -> Optional[Tuple[int, int]]:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Run the Sora watermark removal pipeline end-to-end.",
+        description="Run the animated watermark removal pipeline end-to-end.",
     )
 
     parser.add_argument(

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Setup script for Sora Watermark Remover - Standalone Pipeline
+# Setup script for Animated Watermark Remover - Standalone Pipeline
 # Run this on your Windows server (WSL/Git Bash) or adjust for PowerShell
 
 set -e
@@ -8,7 +8,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
 echo "==================================="
-echo "Sora Watermark Remover Setup"
+echo "Animated Watermark Remover Setup"
 echo "==================================="
 
 # 1. Create vendor directory

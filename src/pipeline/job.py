@@ -1,4 +1,4 @@
-"""High-level orchestration for the Sora watermark removal pipeline."""
+"""High-level orchestration for the animated watermark removal pipeline."""
 
 from __future__ import annotations
 
@@ -53,7 +53,7 @@ class PipelineValidationError(RuntimeError):
 
 
 class SoraWatermarkJob:
-    """End-to-end orchestration of the Sora watermark removal workflow."""
+    """End-to-end orchestration of the animated watermark removal workflow."""
 
     def __init__(
         self,

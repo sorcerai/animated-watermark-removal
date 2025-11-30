@@ -1,1 +1,1 @@
-# Sora Watermark Remover source package
+# Animated Watermark Remover source package

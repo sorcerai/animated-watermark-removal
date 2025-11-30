@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-YOLO-World Open-Vocabulary Detector for Sora Watermark Detection
+YOLO-World Open-Vocabulary Detector for Animated Watermark Detection
 
 Uses YOLO-World's open-vocabulary capability to detect:
 - "SORA" text watermark
@@ -27,7 +27,7 @@ class YOLOWorldDetector:
     "SORA" text and @username variations.
     """
 
-    # Default detection classes for Sora watermarks
+    # Default detection classes for animated watermarks
     DEFAULT_CLASSES = [
         "SORA",
         "text",

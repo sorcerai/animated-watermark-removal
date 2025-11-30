@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Sora Watermark Remover - CLI Entry Point
+Animated Watermark Remover - CLI Entry Point
 
 Removes animated watermarks (SORA + @username) from videos using:
 - YOLO-World for open-vocabulary detection

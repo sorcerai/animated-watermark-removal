@@ -1,4 +1,4 @@
-# Setup script for Sora Watermark Remover - Standalone Pipeline
+# Setup script for Animated Watermark Remover - Standalone Pipeline
 # Run this on Windows PowerShell
 
 $ErrorActionPreference = "Stop"
@@ -7,7 +7,7 @@ $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 Set-Location $ScriptDir
 
 Write-Host "===================================" -ForegroundColor Cyan
-Write-Host "Sora Watermark Remover Setup" -ForegroundColor Cyan
+Write-Host "Animated Watermark Remover Setup" -ForegroundColor Cyan
 Write-Host "===================================" -ForegroundColor Cyan
 
 # 1. Create vendor directory
