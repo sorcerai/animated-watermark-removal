@@ -1,0 +1,91 @@
+# Virtual environments
+.venv*/
+venv/
+env/
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Models (too large for git - download separately)
+models/
+*.pt
+*.pth
+*.safetensors
+*.ckpt
+*.bin
+
+# Vendor dependencies (clone separately)
+vendor/
+
+# Temporary files
+temp/
+tmp/
+*.tmp
+
+# Test outputs and files
+test_*.png
+test_*.jpg
+test_*.py
+*_mask.png
+*_result.png
+*_vis.png
+*_preview/
+horizontal-mask.png
+vertical-mask.png
+
+# Old workflow files (ComfyUI era)
+*-LOCAL-FIXED.json
+activity-log.md
+
+# Video files
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.webm
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+nul
+
+# Logs
+*.log
+logs/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Local config
+*.local
+.env.local
+
+# Build artifacts
+*.json.bak

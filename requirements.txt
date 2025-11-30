@@ -1,0 +1,27 @@
+# Core dependencies
+numpy>=1.24.0
+opencv-python>=4.8.0
+Pillow>=10.0.0
+
+# Deep Learning (install PyTorch first with CUDA support)
+# pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
+torch>=2.0.0
+torchvision>=0.15.0
+
+# SAM3 (install from git)
+# pip install git+https://github.com/anthropics/sam3.git
+# Dependencies for SAM3:
+einops>=0.6.0
+transformers>=4.30.0
+huggingface-hub>=0.16.0
+
+# Optional: YOLO-World detection (alternative to SAM3 text mode)
+ultralytics>=8.0.0
+
+# ProPainter dependencies (also in vendor/ProPainter)
+scipy>=1.10.0
+imageio>=2.31.0
+decord>=0.6.0
+
+# FFmpeg is a system dependency (not pip)
+# Install via: apt install ffmpeg (Linux) / choco install ffmpeg (Windows)

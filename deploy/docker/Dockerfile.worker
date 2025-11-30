@@ -1,0 +1,92 @@
+# ComfyUI Worker - Docker Image
+# For Linux deployment (RunPod, Railway, etc.)
+
+FROM nvidia/cuda:12.1.0-runtime-ubuntu22.04
+
+# Prevent interactive prompts
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    python3.10 \
+    python3-pip \
+    git \
+    wget \
+    ffmpeg \
+    libgl1-mesa-glx \
+    libglib2.0-0 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /app
+
+# Install ComfyUI
+RUN git clone https://github.com/comfyanonymous/ComfyUI.git && \
+    cd ComfyUI && \
+    pip install -r requirements.txt
+
+# Install custom nodes
+WORKDIR /app/ComfyUI/custom_nodes
+
+# DiffuEraser
+RUN git clone https://github.com/ShmuelRonen/ComfyUI_DiffuEraser.git && \
+    cd ComfyUI_DiffuEraser && \
+    pip install -r requirements.txt
+
+# SAM 2
+RUN git clone https://github.com/kijai/ComfyUI-SAM2.git && \
+    cd ComfyUI-SAM2 && \
+    pip install -r requirements.txt
+
+# VideoHelperSuite
+RUN git clone https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite.git && \
+    cd ComfyUI-VideoHelperSuite && \
+    pip install -r requirements.txt
+
+# KJNodes
+RUN git clone https://github.com/kijai/ComfyUI-KJNodes.git && \
+    cd ComfyUI-KJNodes && \
+    pip install -r requirements.txt
+
+# LayerStyle
+RUN git clone https://github.com/chflame163/ComfyUI_LayerStyle.git && \
+    cd ComfyUI_LayerStyle && \
+    pip install -r requirements.txt
+
+# Easy-Use
+RUN git clone https://github.com/yolain/ComfyUI-Easy-Use.git && \
+    cd ComfyUI-Easy-Use && \
+    pip install -r requirements.txt
+
+# Download models
+WORKDIR /app/ComfyUI/models
+
+# DiffuEraser checkpoint
+RUN mkdir -p checkpoints && \
+    wget -O checkpoints/pcm_sd15_smallcfg_2step_converted.safetensors \
+    https://huggingface.co/YihanLi/DiffuEraser/resolve/main/pcm_sd15_smallcfg_2step_converted.safetensors
+
+# SAM 2 Base
+RUN mkdir -p sam2 && \
+    wget -O sam2/sam2_hiera_base_plus.pt \
+    https://huggingface.co/facebook/sam2-hiera-base-plus/resolve/main/sam2_hiera_base_plus.pt
+
+# Copy workflows
+WORKDIR /app/ComfyUI/workflows
+COPY workflows/templates/*.json ./
+
+# Copy our client library
+WORKDIR /app
+COPY src/comfyui/client.py ./
+COPY src/core/audio_preservation.py ./
+
+# Expose ComfyUI port
+EXPOSE 8188
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD curl -f http://localhost:8188/system_stats || exit 1
+
+# Start ComfyUI
+WORKDIR /app/ComfyUI
+CMD ["python3", "main.py", "--listen", "0.0.0.0", "--port", "8188"]
