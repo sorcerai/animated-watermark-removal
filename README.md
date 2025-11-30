@@ -1,4 +1,4 @@
-# Sora Watermark Remover
+# Animated Watermark Remover
 
 Remove animated watermarks from Sora-generated videos using AI-powered detection and inpainting.
 
